@@ -36,25 +36,3 @@ dependencies {
     implementation("com.kinqdos", "spigot", "1.17.1")
     implementation(kotlin("stdlib-jdk8"))
 }
-
-publishing {
-    publications {
-        publishing {
-            create<MavenPublication>("montown") {
-                from(components["java"])
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            credentials {
-                val repoUser: String? by project
-                val repoPassword: String? by project
-                username = repoUser ?: ""
-                password = repoPassword ?: ""
-            }
-            url = uri("https://repo.kinqdos.de/artifactory/montown")
-        }
-    }
-}
