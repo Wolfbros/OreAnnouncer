@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val outputName = "Montown-Oreannouncer"
+val outputName = "Mt-OreAnnouncer"
 val outputDir = if (System.getProperty("user.home").contains("Carl")) "Desktop\\temp" else "IdeaProjects\\Compile"
 group = "com.montown"
 version = "1.17-V1.0.3"
