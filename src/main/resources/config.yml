@@ -1,0 +1,32 @@
+Config:
+  #Do not change!
+  ConfigVersion: "1"
+
+  #Prefix before every message
+  prefix: ""
+  #AnnounceMessage
+  message: "%prefix% &3%player% &7found &3%amount% &7of &e%block% &7at &b%coordinates% &7in World &b%world%"
+
+  #Interval to clear cached blocks in Minuted. Use 0 to deactivate.
+  #If you use the cache clear feature it might happen, that a vein will be announced 2 times
+  #The performance impact is minor
+  cacheclear: 0
+
+  #List of blocks which should be announced
+  blocks:
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+
+  #Not yet implemented. Just a placeholder for upcoming Database Support
+  DatabaseType: "MySQL"
+  #Not yet implemented. Just a placeholder for upcoming Database Support
+  MySQL:
+    Host: "localhost"
+    Port: "3306"
+    Database: "Database"
+    Username: "User"
+    Password: "1234"

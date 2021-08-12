@@ -1,0 +1,8 @@
+name: MontownOreAnnouncer
+version: 1.0.0
+main: de.montown.announcer.Main
+api-version: 1.17
+author: MaxDerVerpeilte
+permissions:
+  ores.announce:
+    description: Players who gets announced stuff lol
