@@ -1,6 +1,6 @@
 Config:
   #Do not change!
-  ConfigVersion: "1"
+  ConfigVersion: "3"
 
   #Prefix before every message
   prefix: ""
@@ -20,6 +20,14 @@ Config:
     - DEEPSLATE_GOLD_ORE
     - EMERALD_ORE
     - DEEPSLATE_EMERALD_ORE
+
+  discord:
+    #if token is empty DiscordBot feature will be disabled
+    token: ""
+    #the channel ID of the text channel where announcements will be posted
+    channel: ""
+    #the game the bot is playing
+    playing: "Do not XRay"
 
   #Not yet implemented. Just a placeholder for upcoming Database Support
   DatabaseType: "MySQL"

@@ -16,8 +16,9 @@ tasks {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveFileName.set("$outputName.jar")
         configurations.compileClasspath.get().filter {
-            it.name.startsWith("kotlin")
+            it.name.startsWith("kotlin") || it.name.startsWith("JDA")
         }.forEach { from(zipTree(it.absolutePath)) }
+        configurations.compileOnly.get().filter { !it.path.endsWith(".pom") }.forEach { from(zipTree(it)) }
         destinationDirectory.set(file(System.getProperty("user.home") + "\\$outputDir"))
     }
 
@@ -30,9 +31,11 @@ repositories {
     mavenCentral()
     maven("https://repo.kinqdos.de/artifactory/max")
     maven("https://repo.kinqdos.de/artifactory/kinqdos-repo")
+    maven("https://m2.dv8tion.net/releases")
 }
 
 dependencies {
+    compileOnly("net.dv8tion:JDA:4.3.0_307")
     implementation("com.kinqdos", "spigot", "1.17.1")
     implementation(kotlin("stdlib-jdk8"))
 }

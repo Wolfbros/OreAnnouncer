@@ -1,6 +1,7 @@
 package de.montown.announcer.listeners
 
 import de.montown.announcer.Main
+import de.montown.announcer.discord.DiscordBot
 import de.montown.announcer.misc.ConfigLoader
 import de.montown.announcer.misc.prefix
 import org.bukkit.Bukkit
@@ -44,17 +45,16 @@ object InteractListener : Listener {
         if (amount == 0) return
         val operators = Bukkit.getOnlinePlayers().filter { it.hasPermission(permission) }
 
-        operators.forEach {
-            it.sendMessage(
-                ChatColor.translateAlternateColorCodes('&', message)
-                    .replace("%prefix%", prefix)
-                    .replace("%player%", event.player.name)
-                    .replace("%amount%", amount.toString())
-                    .replace("%block%", block.type.name)
-                    .replace("%coordinates%", "${block.location.blockX}, ${block.location.blockY}, ${block.location.blockZ}")
-                    .replace("%world%", block.location.world!!.name)
-            )
-        }
+        val message = ChatColor.translateAlternateColorCodes('&', message)
+            .replace("%prefix%", prefix)
+            .replace("%player%", event.player.name)
+            .replace("%amount%", amount.toString())
+            .replace("%block%", block.type.name)
+            .replace("%coordinates%", "${block.location.blockX}, ${block.location.blockY}, ${block.location.blockZ}")
+            .replace("%world%", block.location.world!!.name)
+
+        operators.forEach { it.sendMessage(message) }
+        DiscordBot.sendUpdate(message.replace("§[a-zA-Z0-9]".toRegex(), ""))
 
 
     }

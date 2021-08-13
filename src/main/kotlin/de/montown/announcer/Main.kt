@@ -1,5 +1,6 @@
 package de.montown.announcer
 
+import de.montown.announcer.discord.DiscordBot
 import de.montown.announcer.listeners.InteractListener
 import de.montown.announcer.misc.ConfigLoader
 import org.bukkit.plugin.java.JavaPlugin
@@ -16,5 +17,6 @@ class Main: JavaPlugin() {
         plugin = this
         ConfigLoader
         InteractListener
+        DiscordBot
     }
 }

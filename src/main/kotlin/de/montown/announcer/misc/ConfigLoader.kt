@@ -15,7 +15,7 @@ object ConfigLoader {
     var config: YamlConfiguration? = null
         private set
     private val messageFile: File
-    private const val version = "1"
+    private const val version = "3"
 
     init {
         main.dataFolder.mkdir()
@@ -60,7 +60,11 @@ object ConfigLoader {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        val old = config
         create()
+        read()
+        old?.getKeys(true)?.forEach { config?.set(it, config!!.get(it)) }
+        saveConfig()
     }
 
     /**
