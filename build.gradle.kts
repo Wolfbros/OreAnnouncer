@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val outputName = "Mt-OreAnnouncer"
 val outputDir = if (System.getProperty("user.home").contains("Carl")) "Desktop\\temp" else "IdeaProjects\\Compile"
 group = "com.montown"
-version = "1.17-V1.0.3"
+version = "1.0.2"
 
 plugins {
     kotlin("jvm") version "1.5.20"
@@ -29,13 +29,15 @@ tasks {
 
 repositories {
     mavenCentral()
-    maven("https://repo.kinqdos.de/artifactory/max")
-    maven("https://repo.kinqdos.de/artifactory/kinqdos-repo")
+    mavenLocal()
     maven("https://m2.dv8tion.net/releases")
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://oss.sonatype.org/content/repositories/central")
 }
 
 dependencies {
     compileOnly("net.dv8tion:JDA:4.3.0_307")
-    implementation("com.kinqdos", "spigot", "1.17.1")
+    implementation("org.spigotmc", "spigot", "1.17-R0.1-SNAPSHOT")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("net.md-5", "bungeecord-api", "1.17-R0.1-SNAPSHOT")
 }

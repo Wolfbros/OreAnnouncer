@@ -1,7 +1,7 @@
-package de.montown.announcer.misc
+package de.montown.announcer.spigot.misc
 
 import com.google.common.base.Charsets
-import de.montown.announcer.Main
+import de.montown.announcer.spigot.Main
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.*
 import java.util.*
@@ -15,7 +15,7 @@ object ConfigLoader {
     var config: YamlConfiguration? = null
         private set
     private val messageFile: File
-    private const val version = "3"
+    private const val version = "4"
 
     init {
         main.dataFolder.mkdir()

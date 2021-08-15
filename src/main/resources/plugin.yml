@@ -1,6 +1,6 @@
 name: Mt-OreAnnouncer
-version: 1.1
-main: de.montown.announcer.Main
+version: 1.2
+main: de.montown.announcer.spigot.Main
 api-version: 1.17
 author: MaxDerVerpeilte
 permissions:

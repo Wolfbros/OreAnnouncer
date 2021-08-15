@@ -1,0 +1,4 @@
+name: Mt-OreAnnouncer
+version: "1.2"
+main: de.montown.announcer.bungee.Main
+author: MaxDerVerpeilte

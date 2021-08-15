@@ -1,0 +1,27 @@
+BungeeConfig:
+  #Do not change!
+  ConfigVersion: "1"
+
+  #Prefix before every message
+  prefix: ""
+  #AnnounceMessage
+  message: "%prefix% &3%player% &7found &3%amount% &7of &e%block% &7at %server%: &b%coordinates% &7in World &b%world%"
+
+
+  discord:
+    #if token is empty DiscordBot feature will be disabled
+    token: ""
+    #the channel ID of the text channel where announcements will be posted
+    channel: ""
+    #the game the bot is playing
+    playing: "Do not XRay"
+
+  #Not yet implemented. Just a placeholder for upcoming Database Support
+  DatabaseType: "MySQL"
+  #Not yet implemented. Just a placeholder for upcoming Database Support
+  MySQL:
+    Host: "localhost"
+    Port: "3306"
+    Database: "Database"
+    Username: "User"
+    Password: "1234"

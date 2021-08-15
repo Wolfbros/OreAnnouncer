@@ -1,6 +1,6 @@
-package de.montown.announcer.discord
+package de.montown.announcer.bungee.discord
 
-import de.montown.announcer.misc.ConfigLoader
+import de.montown.announcer.bungee.misc.ConfigLoader
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
@@ -13,8 +13,8 @@ object DiscordBot {
     private var api: JDA?
 
     init {
-        val token = ConfigLoader.config?.getString("Config.discord.token")
-        val playing = ConfigLoader.config?.getString("Config.discord.playing")?:"Nothing to see here"
+        val token = ConfigLoader.config?.getString("BungeeConfig.discord.token")
+        val playing = ConfigLoader.config?.getString("BungeeConfig.discord.playing")?:"Nothing to see here"
         api = if (token == null || token == "") {
             null
         } else {
@@ -32,7 +32,7 @@ object DiscordBot {
 
     fun sendUpdate(string: String) {
         if (api == null) return
-        ConfigLoader.config?.let { api!!.getTextChannelById(it.getLong("Config.discord.channel")) }?.sendMessage(string)?.queue()
+        ConfigLoader.config?.let { api!!.getTextChannelById(it.getLong("BungeeConfig.discord.channel")) }?.sendMessage(string)?.queue()
     }
 
 }

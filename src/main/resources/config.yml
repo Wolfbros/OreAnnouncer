@@ -1,6 +1,9 @@
 Config:
   #Do not change!
-  ConfigVersion: "3"
+  ConfigVersion: "4"
+
+  #if you want to use the global Bungee Mode turn this to true
+  enableBungeecord: false
 
   #Prefix before every message
   prefix: ""
@@ -23,6 +26,7 @@ Config:
 
   discord:
     #if token is empty DiscordBot feature will be disabled
+    #If Bungeecord is enabled you should turn this on in the Bungeecord config and turn off in Spigot config
     token: ""
     #the channel ID of the text channel where announcements will be posted
     channel: ""

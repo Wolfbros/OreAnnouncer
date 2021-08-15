@@ -1,14 +1,16 @@
-package de.montown.announcer.listeners
+package de.montown.announcer.spigot.listeners
 
-import de.montown.announcer.Main
-import de.montown.announcer.discord.DiscordBot
-import de.montown.announcer.misc.ConfigLoader
-import de.montown.announcer.misc.prefix
+import com.google.common.io.ByteStreams
+import de.montown.announcer.spigot.Main
+import de.montown.announcer.spigot.discord.DiscordBot
+import de.montown.announcer.spigot.misc.ConfigLoader
+import de.montown.announcer.spigot.misc.prefix
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -43,18 +45,22 @@ object InteractListener : Listener {
         if (!materials.contains(block.type)) return
         val amount = getNode(block, block.type)
         if (amount == 0) return
-        val operators = Bukkit.getOnlinePlayers().filter { it.hasPermission(permission) }
 
-        val message = ChatColor.translateAlternateColorCodes('&', message)
-            .replace("%prefix%", prefix)
-            .replace("%player%", event.player.name)
-            .replace("%amount%", amount.toString())
-            .replace("%block%", block.type.name)
-            .replace("%coordinates%", "${block.location.blockX}, ${block.location.blockY}, ${block.location.blockZ}")
-            .replace("%world%", block.location.world!!.name)
+        if(config!!.getBoolean("Config.enableBungeecord")){
+            sendToBungeecord(event.player, amount, block)
+        }else{
+            val operators = Bukkit.getOnlinePlayers().filter { it.hasPermission(permission) }
+            val message = ChatColor.translateAlternateColorCodes('&', message)
+                .replace("%prefix%", prefix)
+                .replace("%player%", event.player.name)
+                .replace("%amount%", amount.toString())
+                .replace("%block%", block.type.name)
+                .replace("%coordinates%", "${block.location.blockX}, ${block.location.blockY}, ${block.location.blockZ}")
+                .replace("%world%", block.location.world!!.name)
 
-        operators.forEach { it.sendMessage(message) }
-        DiscordBot.sendUpdate(message.replace("§[a-zA-Z0-9]".toRegex(), ""))
+            operators.forEach { it.sendMessage(message) }
+            DiscordBot.sendUpdate(message.replace("§[a-zA-Z0-9]".toRegex(), ""))
+        }
 
 
     }
@@ -72,5 +78,15 @@ object InteractListener : Listener {
         returnInt += getNode(block.location.world!!.getBlockAt(location.add(0.0, 1.0, 1.0)), type)
         returnInt += getNode(block.location.world!!.getBlockAt(location.add(0.0, 0.0, -2.0)), type)
         return returnInt
+    }
+
+    fun sendToBungeecord(player:Player, amount:Int, block: Block){
+        val out = ByteStreams.newDataOutput()
+        out.writeUTF(player.name)
+        out.writeUTF(amount.toString())
+        out.writeUTF(block.type.name)
+        out.writeUTF("${block.location.blockX}, ${block.location.blockY}, ${block.location.blockZ}")
+        out.writeUTF(block.location.world!!.name)
+        player.sendPluginMessage(Main.plugin,"oreannouncer:message", out.toByteArray())
     }
 }
