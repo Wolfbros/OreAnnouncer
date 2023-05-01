@@ -34,7 +34,7 @@ object PluginMessageListener : Listener {
         val player = Main.plugin.proxy.getPlayer(playerName)
         val amount = stream.readUTF()
         val block = stream.readUTF()
-        val coords = stream.readUTF()
+        val coords = stream.readUTF().replace(",", "")
         val world = stream.readUTF()
         val prefix = ""
         val server = player.server.info.name
@@ -51,6 +51,6 @@ object PluginMessageListener : Listener {
         Main.plugin.proxy.players.filter { it.hasPermission("ores.announce") }.forEach {
             it.sendMessage(TextComponent(finalMessage))
         }
-        DiscordBot.sendUpdate(finalMessage.replace("§[a-zA-Z0-9]".toRegex(), ""))
+        DiscordBot.sendUpdate(playerName, amount.toString(), block, coords, world, server)
     }
 }
