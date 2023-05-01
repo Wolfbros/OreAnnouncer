@@ -33,11 +33,16 @@ repositories {
     maven("https://m2.dv8tion.net/releases")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://oss.sonatype.org/content/repositories/central")
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly("net.dv8tion:JDA:4.3.0_307")
-    implementation("org.spigotmc", "spigot", "1.17-R0.1-SNAPSHOT")
+    compileOnly("net.dv8tion:JDA:5.0.0-beta.8")
+    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     implementation(kotlin("stdlib-jdk8"))
-    implementation("net.md-5", "bungeecord-api", "1.17-R0.1-SNAPSHOT")
+    implementation("net.md-5", "bungeecord-api", "1.19-R0.1-SNAPSHOT")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
